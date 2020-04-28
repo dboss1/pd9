@@ -1,0 +1,51 @@
+cd C:\Users\dmbos\Documents\Skewl\ift458\module7\humanFund
+
+python manage.py shell
+
+from backend.models import *
+
+user1 = UserInfo(username='user1',fName='Testy',lName='McTesterson',email='fake@fake.com',gender='male',address='123 Fake Street',city='Fakesville',state='CA',cellPhone='555-555-5555',country='USA',dob='1980-01-01')
+user2 = UserInfo(username='user2',fName='Amanda',lName='Hugnkiss',email='LegitEmail@fake.com',gender='Female',address='456 Real Street',city='Realsville',state='NY',cellPhone='555-555-5555',country='USA',dob='1980-04-01')
+user1.save()
+user2.save()
+
+
+service1 = Service(servicesname='Some Service',description='services for folks',premium='yes', allocation='perhaps?')
+service2 = Service(servicesname='Another Service',description='services for people',premium='no', allocation='why not')
+service1.save()
+service2.save()
+
+subType1 = SubscriptionType(subscriptiontypename='monthly')
+subType2 = SubscriptionType(subscriptiontypename='annual')
+subType1.save()
+subType2.save()
+
+tsub1 = TransferredSubscription(transferFrom='Bob',transferTo='Testy',requestDate='2012-05-05',transferDate='2013-4-2',subscriberID=user1)
+tsub2 = TransferredSubscription(transferFrom='Anita',transferTo='Amanda',requestDate='2020-01-01',transferDate='2020-02-05',subscriberID=user2)
+tsub1.save()
+tsub2.save()
+
+sub1 = Subscriber(username=user1,subscriptiontypecode=subType1,servicecode=service1,requestdate='2020-1-5',startdate='2020-2-3',enddate='2020-5-4',motifofcancellation='none')
+sub2 = Subscriber(username=user2,subscriptiontypecode=subType2,servicecode=service2,requestdate='2020-1-4',startdate='2020-2-1',enddate='2020-2-21',motifofcancellation='smooth')
+sub1.save()
+sub2.save()
+
+office1 = Office(officename='Some Office',attribution='Yes')
+office2 = Office(officename='Another office',attribution='perhaps')
+office1.save()
+office2.save()
+
+officer1 = Officer(officecode=office1,subscriberID=sub1,startdate='2020-01-01',enddate='2020-3-15')
+officer2 = Officer(officecode=office2,subscriberID=sub2,startdate='2019-12-15',enddate='2020-03-30')
+officer1.save()
+officer2.save()
+
+org1 = Organization(organizationname='Fake Organization',description='Fake',datejoined='1992-05-03',address1='1313 Mockingbird Ln',address2='',city='Mockingbird Heights',state='CA',zipcode='90701',phonenumber='')
+org2 = Organization(organizationname='Real Organization',description='Real',datejoined='2010-06-12',address1='789 Fake St',address2='Apt 2',city='Los Angeles',state='CA',zipcode='90708',phonenumber='555-555-5555')
+org1.save()
+org2.save()
+
+orgmem1 = OrganizationMember(organizationCode=org1,subscriberID=sub1,startdate='2005-01-03',enddate='2017-08-13',nativecountry='USA',citizenship='Native',isdelegate='True')
+orgmem2 = OrganizationMember(organizationCode=org2,subscriberID=sub2,startdate='2011-07-15',enddate='2020-12-05',nativecountry='Mexico',citizenship='Permanent Resident',isdelegate='False')
+orgmem1.save()
+orgmem2.save()
